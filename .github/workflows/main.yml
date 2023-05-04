@@ -1,7 +1,9 @@
-name: Java CI
-
+name: Build and Test Java Application
 on:
-  push:
+   push:
+    branches: [main]
+  pull_request:
+    branches: [main]
     
 
 jobs:
@@ -10,6 +12,10 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
     - name: Build with Gradle
       run: ./gradlew build
     - name: Run tests
